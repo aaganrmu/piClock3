@@ -21,7 +21,7 @@ def display(n, block_orientation, rotate, inreverse):
     device.contrast(255)
     msg = "CLOCK"
     print(msg)
-    show_message(device, msg, fill="white", font=SINCLAIR_FONT(CP437_FONT))
+    show_message(device, msg, fill="white", font=proportional(SINCLAIR_FONT))
 
     for intensity in range(0xFF,0,-1):
         device.contrast(intensity)
