@@ -41,6 +41,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     try:
-        demo(args.cascaded, args.block_orientation, args.rotate, args.reverse_order)
+        display(args.cascaded, args.block_orientation, args.rotate, args.reverse_order)
     except KeyboardInterrupt:
         pass
