@@ -42,10 +42,10 @@ def animation(device, from_y, to_y):
 
 
 def main():
-    # Setup for Banggood version of 4 x 8x8 LED Matrix (https://bit.ly/2Gywazb)
+    # Setup for Aliexpress version of 4 x 8x8 LED Matrix
     serial = spi(port=0, device=0, gpio=noop())
     device = max7219(serial, cascaded=4, block_orientation=-90, blocks_arranged_in_reverse_order=False)
-    device.contrast(16)
+    device.contrast(1)
 
     # The time ascends from the abyss...
     animation(device, 8, 1)
