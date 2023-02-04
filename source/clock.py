@@ -23,7 +23,7 @@ def display(n, block_orientation, rotate, inreverse):
     print(msg)
     show_message(device, msg, fill="white", font=SINCLAIR_FONT(CP437_FONT))
 
-    for(intensity in [0xFF:0:-1]
+    for(intensity in range(0xFF,0,-1):
         device.contrast(intensity)
         time.sleep(0.01)
     
