@@ -39,8 +39,8 @@ def display(device):
         second_binary = "{0:08b}".format(second)
         for i, value in enumerate(second_binary):
             if value == "1":
-                draw.point((15, 7-i), fill="white")
-                draw.point((16, 7-i), fill="white")
+                draw.point((15, i), fill="white")
+                draw.point((16, i), fill="white")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='matrix_demo arguments',
