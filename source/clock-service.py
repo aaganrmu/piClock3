@@ -23,7 +23,7 @@ def display(device):
     number_font = LCD_FONT
     t = datetime.now().time()
     hour = t.strftime("%H")
-    minute t.strftime("%M")
+    minute = t.strftime("%M")
     second = t.second
 
     with  canvas(device) as draw:
