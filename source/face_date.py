@@ -1,4 +1,4 @@
-from display import display
+from face import face
 
 from datetime import datetime
 from luma.core.render import canvas
@@ -8,7 +8,7 @@ from luma.core.legacy.font import proportional, CP437_FONT, TINY_FONT, SINCLAIR_
 from PIL import ImageFont
 import time
 
-class display_date(display):
+class face_date(face):
     def __init__(self, device):
         self._font = proportional(TINY_FONT)
         self._device = device

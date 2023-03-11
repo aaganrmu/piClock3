@@ -12,8 +12,8 @@ from luma.core.legacy.font import proportional, CP437_FONT, TINY_FONT, SINCLAIR_
 from PIL import ImageFont
 
 # import clock faces
-from display_time import display_time
-from display_date import display_date
+from face_time import face_time
+from face_date import face_date
 
 def start_display(n, block_orientation, rotate, inreverse):
     # create matrix device
@@ -37,9 +37,9 @@ if __name__ == "__main__":
     
     try:
         device = start_display(args.cascaded, args.block_orientation, args.rotate, args.reverse_order)
-        displays = [display_date(device), display_time(device)]
+        faces = [face_date(device), face_time(device)]
         index = 0
         while True:
-            displays[index].display()
+            faces[index].display()
     except KeyboardInterrupt:
         pass

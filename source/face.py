@@ -1,4 +1,4 @@
-class display():
+class face():
     def __init__(self):
         return
 
