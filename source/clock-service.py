@@ -14,6 +14,7 @@ from PIL import ImageFont
 # import clock faces
 from face_time import face_time
 from face_date import face_date
+from face_message import face_message
 
 def start_display(n, block_orientation, rotate, inreverse):
     # create matrix device
@@ -37,8 +38,12 @@ if __name__ == "__main__":
     
     try:
         device = start_display(args.cascaded, args.block_orientation, args.rotate, args.reverse_order)
-        faces = [face_date(device), face_time(device)]
-        index = 0
+        faces = [
+            face_date(device),
+            face_time(device),
+            face_message(device)
+        ]
+        index = 1
         while True:
             faces[index].display()
     except KeyboardInterrupt:
