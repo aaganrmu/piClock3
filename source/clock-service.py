@@ -11,6 +11,10 @@ from luma.core.legacy import text, show_message
 from luma.core.legacy.font import proportional, CP437_FONT, TINY_FONT, SINCLAIR_FONT, LCD_FONT
 from PIL import ImageFont
 
+# import clock faces
+from display_time import display_time
+from display_date import display_date
+
 def start_display(n, block_orientation, rotate, inreverse):
     # create matrix device
     serial = spi(port=0, device=0, gpio=noop())
@@ -18,29 +22,6 @@ def start_display(n, block_orientation, rotate, inreverse):
                      rotate=rotate or 0, blocks_arranged_in_reverse_order=inreverse)
     device.contrast(0)
     return(device)
-
-def display(device):
-    number_font = LCD_FONT
-    t = datetime.now().time()
-    hour = t.strftime("%H")
-    minute = t.strftime("%M")
-    second = t.second
-
-    with  canvas(device) as draw:
-        text(draw, (2, 1), hour[0], fill="white", font=number_font)
-        text(draw, (8, 1), hour[1], fill="white", font=number_font)
-        text(draw, (19, 1), minute[0], fill="white", font=number_font)
-        text(draw, (25, 1), minute[1], fill="white", font=number_font)
-#        text(draw, (15, 0), ":", fill="white", font=number_font)
-
-#        eights = int(float(second)/60*8)
-#        draw.line([(31, 0), (31, eights)], fill="white")
-#        draw.line([(0,  0), (0,  eights)], fill="white")
-        second_binary = "{0:08b}".format(second)
-        for i, value in enumerate(second_binary):
-            if value == "1":
-                draw.point((15, i), fill="white")
-                draw.point((16, i), fill="white")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='matrix_demo arguments',
@@ -53,10 +34,12 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
+    
     try:
         device = start_display(args.cascaded, args.block_orientation, args.rotate, args.reverse_order)
+        displays = [display_date(device), display_time(device)]
+        index = 0
         while True:
-            display(device)
-            time.sleep(1)
+            displays[index].display()
     except KeyboardInterrupt:
         pass
