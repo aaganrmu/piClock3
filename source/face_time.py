@@ -30,4 +30,4 @@ class face_time(face):
                 if value == "1":
                     draw.point((15, i), fill="white")
                     draw.point((16, i), fill="white")
-            time.sleep(1)
+        time.sleep(1)

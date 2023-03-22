@@ -15,6 +15,7 @@ from PIL import ImageFont
 from face_time import face_time
 from face_date import face_date
 from face_message import face_message
+from face_warn import face_warn
 
 def start_display(n, block_orientation, rotate, inreverse):
     # create matrix device
@@ -35,16 +36,16 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    
     try:
         device = start_display(args.cascaded, args.block_orientation, args.rotate, args.reverse_order)
         faces = [
             face_date(device),
             face_time(device),
-            face_message(device)
+            # face_message(device),
+            # face_warn(device)
         ]
-        index = 2
+        index = 1
         while True:
-            faces[index].display("Hallo allemaal")
+            faces[index].display() 
     except KeyboardInterrupt:
         pass

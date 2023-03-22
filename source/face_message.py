@@ -16,7 +16,6 @@ class face_message(face):
         self.display_width = 4*8
 
     def display(self, message):
-        # render = Image.new(1, )
         message_length = len(message)*6
         for offset in  range(self.display_width, -message_length, -1):
             with canvas(self._device) as draw:

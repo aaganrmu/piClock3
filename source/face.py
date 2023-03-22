@@ -1,7 +1,6 @@
 class face():
     def __init__(self):
-        return
+        return\
 
     def display(canvas):
         return
-
