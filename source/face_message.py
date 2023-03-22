@@ -5,29 +5,21 @@ from luma.core.render import canvas
 from luma.core.legacy import text
 from luma.core.legacy.font import proportional, CP437_FONT, TINY_FONT, SINCLAIR_FONT, LCD_FONT
 
-from PIL import ImageFont
+from PIL import ImageFont, Image, ImageDraw
 import time
+
 
 class face_message(face):
     def __init__(self, device):
-        self._font = LCD_FONT
         self._device = device
+        self.speed = 0
+        self.display_width = 4*8
 
     def display(self, message):
-        t = datetime.now().time()
-        hour = t.strftime("%H")
-        minute = t.strftime("%M")
-        second = t.second
-
-        with canvas(self._device) as draw:
-            text(draw, (2, 1), hour[0], fill="white", font=self._font)
-            text(draw, (8, 1), hour[1], fill="white", font=self._font)
-            text(draw, (19, 1), minute[0], fill="white", font=self._font)
-            text(draw, (25, 1), minute[1], fill="white", font=self._font)
-
-            second_binary = "{0:08b}".format(second)
-            for i, value in enumerate(second_binary):
-                if value == "1":
-                    draw.point((15, i), fill="white")
-                    draw.point((16, i), fill="white")
-            time.sleep(1)
+        # render = Image.new(1, )
+        message_length = len(message)*6
+        for offset in  range(self.display_width, -message_length, -1):
+            with canvas(self._device) as draw:
+                text(draw, (offset, 1), message, fill="white", font=proportional(LCD_FONT))
+            if self.speed:
+                time.sleep(1/self.speed)

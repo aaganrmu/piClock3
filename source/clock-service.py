@@ -22,7 +22,7 @@ def start_display(n, block_orientation, rotate, inreverse):
     device = max7219(serial, cascaded=n or 1, block_orientation=block_orientation,
                      rotate=rotate or 0, blocks_arranged_in_reverse_order=inreverse)
     device.contrast(0)
-    return(device)
+    return device
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='matrix_demo arguments',
@@ -43,8 +43,8 @@ if __name__ == "__main__":
             face_time(device),
             face_message(device)
         ]
-        index = 1
+        index = 2
         while True:
-            faces[index].display()
+            faces[index].display("Hallo allemaal")
     except KeyboardInterrupt:
         pass
