@@ -1,0 +1,5 @@
+07:15:00 wake
+08:20:00 school
+12:00:00 lunch
+22:00:00 sleep
+23:55:00 dream
