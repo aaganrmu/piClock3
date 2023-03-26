@@ -15,6 +15,8 @@ from face_date import face_date
 from face_message import face_message
 from face_warn import face_warn
 
+from schedule import Schedule, Event
+
 def start_display(n, block_orientation, rotate, inreverse):
     # create matrix device
     serial = spi(port=0, device=0, gpio=noop())
@@ -34,16 +36,30 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
+    schedule = Schedule()
+    schedule.file_path = "schedule.txt"
+    event_stack = []
     try:
         device = start_display(args.cascaded, args.block_orientation, args.rotate, args.reverse_order)
         faces = [
             face_date(device),
             face_time(device),
-            # face_message(device),
-            # face_warn(device)
+            face_message(device),
+            face_warn(device)
         ]
         index = 1
         while True:
-            faces[index].display() 
+            event_stack += schedule.check_for_events()
+            if event_stack:
+                index = 3;
+                event = event_stack.pop(0)
+                message = event.name
+
+            if index in [0, 1]:
+                faces[index].display()
+
+            if index in [2, 3]:
+                faces[index].display(message)
+                index = 1
     except KeyboardInterrupt:
         pass
